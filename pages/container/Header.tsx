@@ -8,7 +8,7 @@ interface HeaderProps {
 const Header = ({ heart = 3, point = 100 }: HeaderProps) => {
   console.log("point", point);
   return (
-    <header className="flex flex-col flex-none mx-auto w-full bg-white sticky left-0 top-0 z-10 border-b border-gray-200">
+    <header className="flex flex-col flex-none mx-auto w-full bg-white sticky left-0 top-0 z-10 border-b border-gray-200 header-modal-custom">
       <nav className="sm:flex items-center px-4 lg:px-5 py-4 order-1 shadow-sm justify-around">
         <div className="flex items-center">
           <div className="mr-4">Trái tym: </div>
@@ -29,7 +29,7 @@ const Header = ({ heart = 3, point = 100 }: HeaderProps) => {
         <div className="flex items-center">
           Điểm của X:{" "}
           <span className="text-blue-600 ml-2 text-xl font-semibold">
-            {point}
+            {point*100}
           </span>
         </div>
       </nav>

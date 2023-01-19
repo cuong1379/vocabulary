@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Card, List, Watermark } from "antd";
+import { Card, List, Modal, Watermark } from "antd";
 import { listE1, listE2 } from "../constant/constant";
 import Header from "./container/Header";
 
@@ -9,7 +9,10 @@ const Synonyms = () => {
   const [secondWord, setSecondWord] = useState("");
 
   const [point, setPoint] = useState(0);
-  const [heart, setHeart] = useState(3)
+  const [heart, setHeart] = useState(3);
+  const [isLose, setIsLose] = useState(false);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const sysRef = useRef<any>();
 
@@ -74,8 +77,7 @@ const Synonyms = () => {
               ?.replaceAll(",", "")}`
           ).childNodes[0].style.opacity = "0.3";
 
-          
-          setPoint(point + 1)
+          setPoint(point + 1);
         }, 500);
       } else {
         //sai
@@ -109,7 +111,7 @@ const Synonyms = () => {
               ?.replaceAll(",", "")}`
           ).childNodes[0].style.backgroundColor = "#ebebeb";
 
-          setHeart(heart - 1)
+          setHeart(heart - 1);
         }, 500);
       }
 
@@ -117,6 +119,21 @@ const Synonyms = () => {
       setSecondWord("");
     }
   }, [firstWord, secondWord, heart, point]);
+
+  useEffect(() => {
+    if (heart < 1) {
+      setIsLose(true);
+      setIsModalOpen(true);
+    }
+  }, [heart]);
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <>
@@ -153,6 +170,33 @@ const Synonyms = () => {
             ""
           )}
         </div>
+
+        <Modal
+          title="You Lose"
+          open={isModalOpen}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          footer={null}
+        >
+          <div className="flex flex-col justify-center items-center">
+            <div className="mb-8 flex items-center">
+              Your score:{" "}
+              <span className="text-blue-600 ml-2 text-xl font-semibold">
+                {point * 100}
+              </span>
+            </div>
+
+            <div>
+              <button
+                type="button"
+                onClick={() => location.reload()}
+                className="text-white bg-blue-700 w-32 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              >
+                Play again
+              </button>
+            </div>
+          </div>
+        </Modal>
       </Watermark>
     </>
   );

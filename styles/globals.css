@@ -73,3 +73,8 @@ body {
 .synonyms-content-item .ant-card-body:hover {
   transform: scale(1.05);
 }
+
+body .header-modal-custom {
+  backdrop-filter: saturate(180%) blur(5px);
+  background: rgba(255,255,255,0.7);
+}
