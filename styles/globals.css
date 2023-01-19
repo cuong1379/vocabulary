@@ -18,3 +18,58 @@ a {
 * {
   box-sizing: border-box;
 }
+
+body {
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  background-color: rgb(255 255 255 / 10%);
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgb(200 200 200 / 10%);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(200 200 200 / 30%);
+  border-radius: 6px;
+  border: 2px solid rgb(200 200 200 / 10%);
+}
+
+::-webkit-scrollbar-track:hover {
+  background-color: rgb(200 200 200 / 20%);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(200 200 200 / 50%);
+}
+
+
+.synonyms-content-item {
+  padding: 0px !important;
+}
+
+.synonyms-content-item .ant-card-body {
+  padding: 12px;
+  min-height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #ebebeb;
+  border-radius: 4px;
+  cursor: pointer;
+
+  transition: all 0.2s ease-in-out;
+}
+
+.synonyms-content-item .ant-card-body:hover {
+  transform: scale(1.05);
+}
