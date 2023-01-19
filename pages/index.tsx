@@ -46,19 +46,19 @@ const Home: NextPage = () => {
                   className="py-2 px-2 mt-2 rounded cursor-pointer text-lg font-medium text-green-500 hover:bg-gray-100"
                   onClick={() => router?.push("/synonyms?level=1")}
                 >
-                  Level 1: 20 cặp
+                  Level 1: 10 cặp
                 </div>
                 <div
                   className="py-2 px-2 rounded cursor-pointer text-lg font-medium text-blue-500 hover:bg-gray-100"
                   onClick={() => router?.push("/synonyms?level=2")}
                 >
-                  Level 2: 40 cặp
+                  Level 2: 20 cặp
                 </div>
                 <div
                   className="py-2 px-2 rounded cursor-pointer text-lg font-medium text-red-500 hover:bg-gray-100"
                   onClick={() => router?.push("/synonyms?level=3")}
                 >
-                  Level 3: 75 cặp
+                  Level 3: 30 cặp
                 </div>
               </div>
             </Card>

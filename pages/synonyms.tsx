@@ -2,15 +2,17 @@ import React, { useEffect, useRef, useState } from "react";
 import { Card, List, Modal, Watermark } from "antd";
 import { listE1, listE2 } from "../constant/constant";
 import Header from "./container/Header";
+import { useRouter } from "next/router";
 
 const Synonyms = () => {
+  const router = useRouter();
+
   const [listShuff, setListShuff] = useState<string[]>([]);
   const [firstWord, setFirstWord] = useState("");
   const [secondWord, setSecondWord] = useState("");
 
   const [point, setPoint] = useState(0);
   const [heart, setHeart] = useState(3);
-  const [isLose, setIsLose] = useState(false);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -20,9 +22,12 @@ const Synonyms = () => {
     array.sort(() => 0.5 - Math.random());
 
   useEffect(() => {
-    const listShuffed = shuffledArr([...listE1, ...listE2]);
+    const level = Number(router?.query?.level);
+    const newListE1Cut = listE1?.slice(0, level ? level * 10 : 10);
+    const newListE2Cut = listE2?.slice(0, level ? level * 10 : 10);
+    const listShuffed = shuffledArr([...newListE1Cut, ...newListE2Cut]);
     setListShuff(listShuffed);
-  }, []);
+  }, [router?.query?.level]);
 
   const handleCheck = (item: string) => {
     sysRef.current.querySelector(
@@ -122,7 +127,6 @@ const Synonyms = () => {
 
   useEffect(() => {
     if (heart < 1) {
-      setIsLose(true);
       setIsModalOpen(true);
     }
   }, [heart]);
