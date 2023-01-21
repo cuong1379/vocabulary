@@ -1,6 +1,6 @@
 export const listE1 = [
-  "time a year/ once a year",
-  "times a years",
+  "1 time a year/ once a year",
+  "2 times a years",
   "abide by",
   "accompany",
   "account for",
