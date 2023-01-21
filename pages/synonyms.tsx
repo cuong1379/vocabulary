@@ -11,12 +11,18 @@ const Synonyms = () => {
   const [firstWord, setFirstWord] = useState("");
   const [secondWord, setSecondWord] = useState("");
 
+  const [playerName, setPlayerName] = useState<string>("");
   const [point, setPoint] = useState(0);
   const [heart, setHeart] = useState(3);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const sysRef = useRef<any>();
+
+  useEffect(() => {
+    const name = localStorage.getItem("playerName");
+    setPlayerName(name || "NoName");
+  }, []);
 
   const shuffledArr = (array: string[]) =>
     array.sort(() => 0.5 - Math.random());
@@ -39,6 +45,15 @@ const Synonyms = () => {
 
     if (!firstWord && !secondWord) {
       setFirstWord(item);
+    } else if (firstWord == item) {
+      setFirstWord("");
+      setSecondWord("");
+      sysRef.current.querySelector(
+        `.synonyms-card-${item
+          ?.replaceAll(" ", "")
+          ?.replaceAll("/", "")
+          ?.replaceAll(",", "")}`
+      ).childNodes[0].style.backgroundColor = "#ebebeb";
     } else {
       setSecondWord(item);
     }
@@ -135,13 +150,14 @@ const Synonyms = () => {
     setIsModalOpen(false);
   };
 
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-
   return (
     <>
-      <Header heart={heart} point={point} />
+      <Header
+        heart={heart}
+        point={point}
+        playerName={playerName}
+        setIsModalOpen={setIsModalOpen}
+      />
       <Watermark content="Synonyms">
         <div style={{ minHeight: "100vh" }} className="p-4" ref={sysRef}>
           {listShuff?.length ? (
@@ -179,12 +195,12 @@ const Synonyms = () => {
           title="You Lose"
           open={isModalOpen}
           onOk={handleOk}
-          onCancel={handleCancel}
           footer={null}
+          closable={false}
         >
           <div className="flex flex-col justify-center items-center">
             <div className="mb-8 flex items-center">
-              Your score:{" "}
+              {`${playerName}'s`} score:{" "}
               <span className="text-blue-600 ml-2 text-xl font-semibold">
                 {point * 100}
               </span>
