@@ -3,7 +3,6 @@ export const listE1 = [
   "2 times a years",
   "abide by",
   "accompany",
-  "account for",
   "accountable for",
   "acquire",
   "address",
